@@ -24,6 +24,20 @@ test(sha2.sha256,
 test(sha2.sha256, ("a"):rep(1e6),
        "cdc76e5c9914fb9281a1c7e284d73e67f1809a48a497200e046d39ccc7112cd0");
 
+-- test padding
+test(sha2.sha256, ("a"):rep(54),
+       "a3f01b6939256127582ac8ae9fb47a382a244680806a3f613a118851c1ca1d47");
+test(sha2.sha256, ("a"):rep(55),
+       "9f4390f8d30c2dd92ec9f095b65e2b9ae9b0a925a5258e241c9f1e910f734318");
+test(sha2.sha256, ("a"):rep(56),
+       "b35439a4ac6f0948b6d6f9e3c6af0f5f590ce20f1bde7090ef7970686ec6738a");
+test(sha2.sha256, ("a"):rep(64+54),
+       "879dc4f05b19ebc3b037f4683633df1332b054cf52fa372d323c421cb893a2aa");
+test(sha2.sha256, ("a"):rep(64+55),
+       "31eba51c313a5c08226adf18d4a359cfdfd8d2e816b13f4af952f7ea6584dcfb");
+test(sha2.sha256, ("a"):rep(64+56),
+       "2f3d335432c70b580af0e8e1b3674a7c020d683aa5f73aaaedfdc55af904c21c");
+
 local s = ("a"):rep(200* 2^20); -- x * 1MB
 local sha256 = sha2.sha256;
 local time = os.clock();
